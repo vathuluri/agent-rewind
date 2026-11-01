@@ -8,7 +8,7 @@ Agent Rewind is a small, local debugger for agent trajectories. It combines an a
 
 **[Open the live interactive demo →](https://vijayathuluri.netlify.app/agent-rewind/)**
 
-No install, sign-in or API key. Scrub between recorded snapshots, play the timeline, fork before a decision and compare policies. Export any simulated run as JSON. Runs live only in the current tab and reset when you refresh.
+No install, sign-in or API key. Start with a guided 60-second walkthrough: watch the blocked attempt, rewind to its health check, and try an evidence-first decision. Expand the optional debugger to scrub snapshots, play the timeline and compare policies. Export any simulated run as JSON. Runs live only in the current tab and reset when you refresh.
 
 The hosted demo is a JavaScript simulation of the same checkout scenario. It does not run Python, SQLite, an LLM or production tools. It maintains its own browser-side hash chains; it is not a hosted recorder for private agent data. The Python implementation below provides the actual SQLite recorder.
 
@@ -22,10 +22,10 @@ python -m agent_rewind serve
 
 Open **http://127.0.0.1:8765**:
 
-1. Click **Run incident demo**. A speed-first policy attempts a restart outside its allowed permissions.
-2. Select **Inspect current service health** in the timeline. The recorded observation shows current latency is normal and the alert is stale.
-3. Choose **evidence-first**, then **Fork from this checkpoint**.
-4. Compare the original and branch. The original remains blocked; the branch closes the synthetic stale alert.
+1. Click **Watch the first attempt** to see why the restart was blocked.
+2. Click **Rewind to the health check** to inspect the evidence available before the decision.
+3. Click **Try the evidence-first decision** to create a separate branch.
+4. Compare the outcomes, then optionally open **Explore the debugger** for recorded state and JSON export.
 
 ![Agent Rewind comparing two policies](docs/browser-demo.png)
 
