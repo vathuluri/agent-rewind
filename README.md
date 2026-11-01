@@ -4,7 +4,15 @@
 
 Agent Rewind is a small, local debugger for agent trajectories. It combines an append-only SQLite recorder, checkpoint inspection, independent branches, a comparison view and JSON export. The included incident-response simulation runs without API keys or external services.
 
-## Try it in two minutes
+## Try it in your browser
+
+**[Open the live interactive demo →](https://vijayathuluri.netlify.app/agent-rewind/)**
+
+No install, sign-in or API key. Scrub between recorded snapshots, play the timeline, fork before a decision and compare policies. Export any simulated run as JSON. Runs live only in the current tab and reset when you refresh.
+
+The hosted demo is a JavaScript simulation of the same checkout scenario. It does not run Python, SQLite, an LLM or production tools. It maintains its own browser-side hash chains; it is not a hosted recorder for private agent data. The Python implementation below provides the actual SQLite recorder.
+
+## Try it locally in two minutes
 
 Requires **Python 3.11+**. The runtime uses only the standard library. From a checkout:
 
@@ -19,7 +27,7 @@ Open **http://127.0.0.1:8765**:
 3. Choose **evidence-first**, then **Fork from this checkpoint**.
 4. Compare the original and branch. The original remains blocked; the branch closes the synthetic stale alert.
 
-![Agent Rewind comparing two policies](docs/demo.png)
+![Agent Rewind comparing two policies](docs/browser-demo.png)
 
 For a CLI-only demonstration:
 
@@ -116,3 +124,12 @@ MIT licensed. Built by [Vijay Athuluri](https://github.com/vathuluri).
 
 Copy docs/github-actions.example.yml to .github/workflows/tests.yml to enable the Linux/Windows Python test matrix. The template is included; an active GitHub Actions workflow is not installed in this release.
 
+
+## Build the standalone HTML demo
+
+```sh
+python build_demo.py
+node --test tests/demo.test.cjs
+```
+
+Serve the generated `demo/` directory on any HTTPS static host (or a localhost server). Its relative assets work under a subdirectory. Node is used only for optional browser-adapter tests; it is not a runtime dependency. The browser demo sends no data to a server and uses Web Crypto for its simulated event hashes.
